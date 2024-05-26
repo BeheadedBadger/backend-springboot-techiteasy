@@ -1,6 +1,7 @@
 package nl.novi.techiteasy_spring.controllers;
 
 import nl.novi.techiteasy_spring.exceptions.ExceptionController;
+import nl.novi.techiteasy_spring.exceptions.RecordNotFoundException;
 import nl.novi.techiteasy_spring.models.TV;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,8 +27,8 @@ public class TelevisionsController {
         try {
             return TVs.get(id);
         }
-        catch (IndexOutOfBoundsException e) {
-            return ExceptionController.outOfBounds();
+        catch (Exception e) {
+            return ExceptionController.recordsNotFound();
         }
     }
 
