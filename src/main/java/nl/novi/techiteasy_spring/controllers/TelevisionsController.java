@@ -9,30 +9,31 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @RestController
+@RequestMapping("/televisions")
 public class TelevisionsController {
     private ArrayList<TV> TVs = new ArrayList<>();
 
-    @GetMapping("/all")
-    public Object getAll() {
-        if (TVs.isEmpty() == false) {
+    @GetMapping()
+    public ResponseEntity<ArrayList<TV>> getAll() {
+        if (!TVs.isEmpty()) {
             return ResponseEntity.ok(TVs);
         }
         else {
-            return ExceptionController.empty();
+            throw new RecordNotFoundException("No tvs");
         }
     }
 
-    @GetMapping("all/{id}")
-    public Object getTVById(@PathVariable int id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<TV> getTVById(@PathVariable int id) {
         try {
-            return TVs.get(id);
+            return ResponseEntity.ok(TVs.get(id));
         }
         catch (Exception e) {
-            return ExceptionController.recordsNotFound();
+            throw new RecordNotFoundException("Id:" + id + " has not been found");
         }
     }
 
-    @PostMapping("/add")
+    @PostMapping()
     public ResponseEntity<TV> createTV(@RequestBody String brand) {
         TV tv = new TV();
         tv.brand = brand;
@@ -40,25 +41,25 @@ public class TelevisionsController {
         return ResponseEntity.created(null).body(tv);
     }
 
-    @PutMapping("/edit/{id}")
-    public Object editTVById(@RequestBody String editedBrand, @PathVariable int id) {
+    @PutMapping("/{id}")
+    public ResponseEntity<String> editTVById(@RequestBody String editedBrand, @PathVariable int id) {
         try {
             TVs.get(id).brand = editedBrand;
             return ResponseEntity.ok("tv with id:" + id + " has been edited to " + editedBrand);
         } catch (IndexOutOfBoundsException e) {
-            return ExceptionController.outOfBounds();
+            throw new RecordNotFoundException("Id:" + id + " has not been found");
         }
     }
 
-    @DeleteMapping("/delete/{id}")
-    public Object deleteTVById(@PathVariable int id)
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteTVById(@PathVariable int id)
     {
         try {
             TVs.remove(id);
             return ResponseEntity.ok("tv with id:" + id + " has been removed");
         }
         catch (IndexOutOfBoundsException e) {
-            return ExceptionController.outOfBounds();
+            throw new RecordNotFoundException("Id:" + id + " has not been found");
         }
     }
 }

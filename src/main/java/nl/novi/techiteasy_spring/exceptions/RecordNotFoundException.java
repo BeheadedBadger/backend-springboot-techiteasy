@@ -1,7 +1,11 @@
 package nl.novi.techiteasy_spring.exceptions;
 
-public class RecordNotFoundException {
-    public static String getMessage() {
-        return "No tv with this id can be found";
+public class RecordNotFoundException extends RuntimeException {
+    public RecordNotFoundException() {
+        super();
+    }
+
+    public RecordNotFoundException(String message) {
+        super(message);
     }
 }
