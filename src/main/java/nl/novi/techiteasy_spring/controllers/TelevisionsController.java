@@ -1,6 +1,7 @@
 package nl.novi.techiteasy_spring.controllers;
 
 import nl.novi.techiteasy_spring.exceptions.ExceptionController;
+import nl.novi.techiteasy_spring.exceptions.InvalidBrandException;
 import nl.novi.techiteasy_spring.exceptions.RecordNotFoundException;
 import nl.novi.techiteasy_spring.models.TV;
 import org.springframework.http.ResponseEntity;
@@ -35,6 +36,10 @@ public class TelevisionsController {
 
     @PostMapping()
     public ResponseEntity<TV> createTV(@RequestBody String brand) {
+        if (brand.length() > 20) {
+            throw new InvalidBrandException("Brand name:" + brand + " is " + brand.length() + " characters. Must be under 20 characters.");
+        }
+
         TV tv = new TV();
         tv.brand = brand;
         TVs.add(tv);

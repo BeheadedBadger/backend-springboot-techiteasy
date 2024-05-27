@@ -15,4 +15,9 @@ public class ExceptionController {
     public ResponseEntity<Object> exception(RecordNotFoundException e) {
         return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(value = InvalidBrandException.class)
+    public ResponseEntity<Object> exception(InvalidBrandException e) {
+        return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+    }
 }
