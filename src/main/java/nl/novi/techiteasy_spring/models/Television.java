@@ -2,6 +2,8 @@ package nl.novi.techiteasy_spring.models;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "Televisions")
 public class Television {
@@ -14,7 +16,6 @@ public class Television {
     private double price;
     private double availableSize;
     private Double refreshRate;
-    private String screenType;
     private String screenQuality;
     private Boolean smartTv;
     private Boolean wifi;
@@ -24,6 +25,16 @@ public class Television {
     private Boolean ambiLight;
     private Integer originalStock;
     private Integer sold;
+    private Date dateSold;
+    private Television.screenType screenType;
+
+    public enum screenType {
+        CRT,
+        LCD,
+        PLASMA,
+        LED,
+        QLED
+    }
 
     public Long getId() {
         return id;
@@ -75,14 +86,6 @@ public class Television {
 
     public void setRefreshRate(Double refreshRate) {
         this.refreshRate = refreshRate;
-    }
-
-    public String getScreenType() {
-        return screenType;
-    }
-
-    public void setScreenType(String screenType) {
-        this.screenType = screenType;
     }
 
     public String getScreenQuality() {
@@ -155,5 +158,21 @@ public class Television {
 
     public void setSold(Integer sold) {
         this.sold = sold;
+    }
+
+    public Date getDateSold() {
+        return dateSold;
+    }
+
+    public void setDateSold(Date dateSold) {
+        this.dateSold = dateSold;
+    }
+
+    public screenType getScreenType() {
+        return screenType;
+    }
+
+    public void setScreenType(screenType ScreenType) {
+        this.screenType = ScreenType;
     }
 }
