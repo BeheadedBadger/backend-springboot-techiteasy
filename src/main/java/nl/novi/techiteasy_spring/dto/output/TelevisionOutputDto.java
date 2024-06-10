@@ -1,24 +1,12 @@
-package nl.novi.techiteasy_spring.models;
-
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Positive;
-
+package nl.novi.techiteasy_spring.dto.output;
+import nl.novi.techiteasy_spring.models.Television;
 import java.util.Date;
 
-@Entity
-@Table(name = "Televisions")
-public class Television {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
-    public Long id;
+public class TelevisionOutputDto {
+    private Long id;
     private String type;
-    @NotBlank
     private String name;
-    @NotBlank
     private String brand;
-    @NotBlank
-    @Positive
     private double price;
     private double availableSize;
     private Double refreshRate;
@@ -44,6 +32,10 @@ public class Television {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getType() {
@@ -174,11 +166,11 @@ public class Television {
         this.dateSold = dateSold;
     }
 
-    public screenType getScreenType() {
+    public Television.screenType getScreenType() {
         return screenType;
     }
 
-    public void setScreenType(screenType ScreenType) {
+    public void setScreenType(Television.screenType ScreenType) {
         this.screenType = ScreenType;
     }
 }
