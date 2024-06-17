@@ -4,4 +4,5 @@ public class CIModuleInputDto {
     public String name;
     public String type;
     public Double price;
+    public Long televisionId;
 }

@@ -40,4 +40,12 @@ public class CIModule {
     public void setPrice(Double price) {
         this.price = price;
     }
+
+    public Television getTelevision() {
+        return television;
+    }
+
+    public void setTelevision(Television television) {
+        this.television = television;
+    }
 }

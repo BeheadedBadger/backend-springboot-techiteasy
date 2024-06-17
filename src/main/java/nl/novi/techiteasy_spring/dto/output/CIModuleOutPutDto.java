@@ -6,6 +6,16 @@ public class CIModuleOutPutDto {
     String type;
     Double price;
 
+    public Long getTelevisionId() {
+        return televisionId;
+    }
+
+    public void setTelevisionId(Long televisionId) {
+        this.televisionId = televisionId;
+    }
+
+    Long televisionId;
+
     public Long getId() {
         return id;
     }
@@ -37,4 +47,6 @@ public class CIModuleOutPutDto {
     public void setPrice(Double price) {
         this.price = price;
     }
+
+
 }

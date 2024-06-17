@@ -18,6 +18,7 @@ public class CIModuleMapper {
         ci.setName(ciModule.getName());
         ci.setType(ciModule.getType());
         ci.setPrice(ciModule.getPrice());
+        ci.setTelevisionId(ciModule.getTelevision().getId());
         return ci;
     }
 }
