@@ -1,10 +1,10 @@
 package nl.novi.techiteasy_spring.models;
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "Televisions")
@@ -33,6 +33,12 @@ public class Television {
     private Integer sold;
     private Date dateSold;
     private Television.screenType screenType;
+    @OneToOne
+    private RemoteController remoteController;
+    @OneToMany(mappedBy = "television")
+    private List<CIModule> ciModules;
+    @ManyToMany(mappedBy = "televisions")
+    private List<WallBracket> wallBrackets;
 
     public enum screenType {
         CRT,

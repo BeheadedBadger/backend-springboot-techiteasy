@@ -1,8 +1,5 @@
 package nl.novi.techiteasy_spring.dto.input;
-import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
-import nl.novi.techiteasy_spring.models.Television;
-
 import java.util.Date;
 
 public class TelevisionInputDto {
