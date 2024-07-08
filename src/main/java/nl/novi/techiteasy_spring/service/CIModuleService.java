@@ -66,4 +66,16 @@ public class CIModuleService {
             throw new RecordNotFoundException("Cannot find ciModule with id " + ciModuleId);
         }
     }
+
+    public String DeleteCIModuleById(Long ciModuleId) {
+        Optional<CIModule> ci = this.repo.findById(ciModuleId);
+
+        if(ci.isPresent()) {
+            this.repo.delete(ci.get());
+            return "Successfully deleted ciModule with id " + ciModuleId;
+        }
+        else {
+            throw new RecordNotFoundException("Cannot find ciModule with id " + ciModuleId);
+        }
+    }
 }

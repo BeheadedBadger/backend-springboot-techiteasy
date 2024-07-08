@@ -41,5 +41,8 @@ public class CIModuleController {
         return ResponseEntity.ok(ciModuleService.GetCIModuleById(ciModuleId));
     }
 
-    //Delete
+    @DeleteMapping("/{ciModuleId}")
+    public ResponseEntity<String> deleteCIModuleById(@PathVariable Long ciModuleId) {
+        return ResponseEntity.ok(ciModuleService.DeleteCIModuleById(ciModuleId));
+    }
 }
