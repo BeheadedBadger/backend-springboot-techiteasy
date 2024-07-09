@@ -27,6 +27,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SpringSecurityConfig {
 
     public final CustomUserDetailsService customUserDetailsService;
+
     private final JwtRequestFilter jwtRequestFilter;
 
     public SpringSecurityConfig(CustomUserDetailsService customUserDetailsService, JwtRequestFilter jwtRequestFilter) {
@@ -65,7 +66,7 @@ public class SpringSecurityConfig {
                 .authorizeHttpRequests(auth ->
                                 auth
                                         // Wanneer je deze uncomments, staat je hele security open. Je hebt dan alleen nog een jwt nodig.
-//                .requestMatchers("/**").permitAll()
+                                        .requestMatchers("/**").permitAll()
                                         .requestMatchers(HttpMethod.POST, "/users").hasRole("ADMIN")
                                         .requestMatchers(HttpMethod.GET,"/users").hasRole("ADMIN")
                                         .requestMatchers(HttpMethod.POST,"/users/**").hasRole("ADMIN")
@@ -88,4 +89,5 @@ public class SpringSecurityConfig {
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
+
 }

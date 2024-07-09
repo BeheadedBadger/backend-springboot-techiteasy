@@ -1,6 +1,7 @@
 package nl.novi.techiteasy_spring.controllers;
 import nl.novi.techiteasy_spring.dto.input.AuthenticationRequest;
 import nl.novi.techiteasy_spring.dto.output.AuthenticationResponse;
+import nl.novi.techiteasy_spring.service.CustomUserDetailsService;
 import nl.novi.techiteasy_spring.utils.JwtUtil;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -8,17 +9,23 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 
 @CrossOrigin
 @RestController
 public class AuthenticationController {
+    private final AuthenticationManager authenticationManager;
 
-    AuthenticationManager authenticationManager;
-    UserDetailsService userDetailsService;
-    JwtUtil jwtUtil;
+    private final CustomUserDetailsService userDetailsService;
+
+    private final JwtUtil jwtUtil;
+
+    public AuthenticationController(AuthenticationManager authenticationManager, CustomUserDetailsService userDetailsService, JwtUtil jwtUtil) {
+        this.authenticationManager = authenticationManager;
+        this.userDetailsService = userDetailsService;
+        this.jwtUtil = jwtUtil;
+    }
 
     //Deze methode geeft de principal (basis user gegevens) terug van de ingelogde gebruiker
 
@@ -33,6 +40,8 @@ public class AuthenticationController {
     @PostMapping(value = "/authenticate")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
 
+        System.out.println(authenticationRequest.getUsername());
+        System.out.println(authenticationRequest.getPassword());
         String username = authenticationRequest.getUsername();
         String password = authenticationRequest.getPassword();
 
@@ -45,8 +54,7 @@ public class AuthenticationController {
             throw new Exception("Incorrect username or password", ex);
         }
 
-        final UserDetails userDetails = userDetailsService
-                .loadUserByUsername(username);
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
         final String jwt = jwtUtil.generateToken(userDetails);
 

@@ -3,7 +3,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import nl.novi.techiteasy_spring.models.Authority;
 import java.util.Set;
 
-public class UserDto {
+public class
+UserDto {
 
     public String username;
     public String password;

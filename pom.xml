@@ -20,13 +20,16 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <version>3.3.0</version>
         </dependency>
         <!--        Deze security dependency is nodig voor Spring security. Zodra je deze dependency inlaadt, is je app beveiligd en kan je er alleen nog in met credentials-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
+            <version>3.3.0</version>
         </dependency>
         <!--        Deze 3 depedencies zijn nodig voor jwt-->
+
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt-api</artifactId>
@@ -51,7 +54,6 @@
             <version>6.3.1.Final</version>
         </dependency>
 
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -71,6 +73,7 @@
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
+            <version>42.7.3</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

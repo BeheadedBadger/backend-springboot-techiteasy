@@ -17,8 +17,13 @@ import java.util.Set;
 
 @Service
 public class UserService {
-    UserRepository userRepository;
-    AuthorityRepository authorityRepository;
+    private final UserRepository userRepository;
+    private final AuthorityRepository authorityRepository;
+
+    public UserService(UserRepository userRepository, AuthorityRepository authorityRepository) {
+        this.userRepository = userRepository;
+        this.authorityRepository = authorityRepository;
+    }
 
     public List<UserDto> getUsers() {
         List<UserDto> collection = new ArrayList<>();

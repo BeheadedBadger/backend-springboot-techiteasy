@@ -14,7 +14,12 @@ import java.util.List;
 @RequestMapping(value = "/users")
 public class UserController {
 
-    UserService userService;
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
 
     @GetMapping(value = "")
     public ResponseEntity<List<UserDto>> getUsers() {
