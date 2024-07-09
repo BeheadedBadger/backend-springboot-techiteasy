@@ -24,7 +24,6 @@ public class User {
             fetch = FetchType.EAGER)
     private Set<Authority> authorities = new HashSet<>();
 
-
     // Deze 3 variabelen zijn niet verplicht.
     // Je mag ook een "String banaan;" toevoegen, als je dat graag wilt.
     @Column(nullable = false)

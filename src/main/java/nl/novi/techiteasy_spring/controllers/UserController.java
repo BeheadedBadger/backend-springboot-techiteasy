@@ -1,8 +1,8 @@
 package nl.novi.techiteasy_spring.controllers;
 import nl.novi.techiteasy_spring.dto.UserDto;
 import nl.novi.techiteasy_spring.dto.input.AuthorityInputDto;
+import nl.novi.techiteasy_spring.exceptions.UsernameNotFoundException;
 import nl.novi.techiteasy_spring.service.UserService;
-import org.apache.coyote.BadRequestException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -57,12 +57,12 @@ public class UserController {
     }
 
     @PostMapping(value = "/{username}/authorities")
-    public ResponseEntity<Object> addUserAuthority(@PathVariable("username") String username, @RequestBody AuthorityInputDto fields) throws BadRequestException {
+    public ResponseEntity<Object> addUserAuthority(@PathVariable("username") String username, @RequestBody AuthorityInputDto fields) throws UsernameNotFoundException {
         try {
             userService.addAuthority(username, fields.authorityName);
             return ResponseEntity.noContent().build();
         } catch (Exception ex) {
-            throw new BadRequestException();
+            throw new UsernameNotFoundException(username);
         }
     }
 
